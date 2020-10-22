@@ -2,6 +2,7 @@ import 'package:ai_attendance/components/main_button.dart';
 import 'package:ai_attendance/screens/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const id = 'welcome_screen';
@@ -12,7 +13,6 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen>
     with TickerProviderStateMixin {
   AnimationController controller1;
-  AnimationController controller2;
   @override
   void initState() {
     super.initState();
@@ -21,13 +21,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         minutes: 10,
       ),
       upperBound: 100.0,
-      vsync: this,
-    );
-    controller2 = AnimationController(
-      duration: Duration(
-        minutes: 2,
-      ),
-      upperBound: 10.0,
       vsync: this,
     );
     controller1.forward();
@@ -70,13 +63,19 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   SizedBox(
                     width: 05.0,
                   ),
-                  Text(
-                    ' ATTENDANCE',
-                    style: TextStyle(
+                  ColorizeAnimatedTextKit(
+                    text: [' ATTENDANCE'],
+                    textStyle: TextStyle(
                       color: Colors.deepPurple,
                       fontSize: 43.0,
                       fontWeight: FontWeight.w900,
                     ),
+                    colors: [
+                      Colors.deepPurple,
+                      Colors.purple,
+                      Colors.white,
+                      Colors.deepPurple,
+                    ],
                   ),
                 ],
               ),

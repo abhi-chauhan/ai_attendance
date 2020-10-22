@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "340084848783",
+    "firebase_url": "https://minorproject-a8c1e.firebaseio.com",
+    "project_id": "minorproject-a8c1e",
+    "storage_bucket": "minorproject-a8c1e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340084848783:android:c14aec5ad05e4d70dcd8fa",
+        "android_client_info": {
+          "package_name": "com.minorproject.ai_attendance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340084848783-vafjd5j2sj6sp203bapkdam23n4iu20l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPYsI7wYd9dJdpNe_-mil2nFRWGBLPIYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "340084848783-vafjd5j2sj6sp203bapkdam23n4iu20l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
