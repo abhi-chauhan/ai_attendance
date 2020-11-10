@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
       return CircularProgressIndicator();
     }
     return MaterialApp(
-      initialRoute: HomeScreen.id,
+      initialRoute: LoginScreen.id,
       routes: {
         PasswordReset.id: (context) => PasswordReset(),
         WelcomeScreen.id: (context) => WelcomeScreen(),

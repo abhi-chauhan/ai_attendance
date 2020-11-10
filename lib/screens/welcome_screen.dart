@@ -40,57 +40,54 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Hero(
-                      tag: 'logo',
-                      child: RotationTransition(
-                        turns:
-                            Tween(begin: 0.0, end: 0.25).animate(controller1),
-                        child: Container(
-                          child: Image.asset(
-                            'images/1.png',
-                          ),
-                          height: 60.0,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Hero(
+                    tag: 'logo',
+                    child: RotationTransition(
+                      turns: Tween(begin: 0.0, end: 0.25).animate(controller1),
+                      child: Container(
+                        child: Image.asset(
+                          'images/1.png',
                         ),
-                      )),
-                  SizedBox(
-                    width: 05.0,
+                        height: 60.0,
+                      ),
+                    )),
+                ColorizeAnimatedTextKit(
+                  text: [' ATTENDANCE'],
+                  textStyle: TextStyle(
+                    color: Colors.deepPurple,
+                    fontSize: 43.0,
+                    fontWeight: FontWeight.w900,
                   ),
-                  ColorizeAnimatedTextKit(
-                    text: [' ATTENDANCE'],
-                    textStyle: TextStyle(
-                      color: Colors.deepPurple,
-                      fontSize: 43.0,
-                      fontWeight: FontWeight.w900,
-                    ),
-                    colors: [
-                      Colors.deepPurple,
-                      Colors.purple,
-                      Colors.white,
-                      Colors.deepPurple,
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 40.0,
-              ),
-              RoundedButton(
+                  colors: [
+                    Colors.deepPurple,
+                    Colors.purple,
+                    Colors.white,
+                    Colors.deepPurple,
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: RoundedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, LoginScreen.id);
                 },
                 title: 'Log In',
                 colour: Colors.deepPurple,
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

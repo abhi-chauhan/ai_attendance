@@ -1,15 +1,18 @@
+import 'dart:io';
 import 'package:ai_attendance/components/main_button.dart';
 import 'package:ai_attendance/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:ai_attendance/constants.dart';
+import 'file:///C:/Users/balra/AndroidStudioProjects/ai_attendance/lib/components/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:ai_attendance/components/alert_box.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter/foundation.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -26,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen>
   @override
   void initState() {
     super.initState();
+
     controller2 = AnimationController(
       duration: Duration(
         minutes: 10,
