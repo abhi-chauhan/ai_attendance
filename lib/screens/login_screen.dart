@@ -57,12 +57,15 @@ class _LoginScreenState extends State<LoginScreen>
           inAsyncCall: spinner,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: AlertBox(
+            child: ListView(children: <Widget>[
+              SizedBox(
+                height: 150.0,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  AlertBox(
                     error: _error,
                     onPressed: () {
                       setState(() {
@@ -70,77 +73,68 @@ class _LoginScreenState extends State<LoginScreen>
                       });
                     },
                   ),
-                  flex: 0,
-                ),
-                Expanded(
-                  child: SizedBox(),
-                  flex: 1,
-                ),
-                Hero(
-                  tag: 'logo',
-                  child: RotationTransition(
-                    turns: Tween(begin: 0.0, end: 0.25).animate(controller2),
-                    child: Container(
-                      height: 150.0,
-                      child: Image.asset('images/1.png'),
+                  Hero(
+                    tag: 'logo',
+                    child: RotationTransition(
+                      turns: Tween(begin: 0.0, end: 0.25).animate(controller2),
+                      child: Container(
+                        height: 150.0,
+                        child: Image.asset('images/1.png'),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 48.0,
-                ),
-                TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  textAlign: TextAlign.center,
-                  onChanged: (input) {
-                    email = input;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your email'),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                TextField(
-                  obscureText: true,
-                  keyboardType: TextInputType.emailAddress,
-                  textAlign: TextAlign.center,
-                  onChanged: (input) {
-                    password = input;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your password'),
-                ),
-                RoundedButton(
-                  onPressed: () async {
-                    setState(() {
-                      spinner = true;
-                    });
-                    try {
-                      final user = await _auth.signInWithEmailAndPassword(
-                          email: email, password: password);
-                      if (user != null) {
-                        Navigator.pushNamed(context, HomeScreen.id);
+                  SizedBox(
+                    height: 48.0,
+                  ),
+                  TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    textAlign: TextAlign.center,
+                    onChanged: (input) {
+                      email = input;
+                    },
+                    decoration: kTextFieldDecoration.copyWith(
+                        hintText: 'Enter your email'),
+                  ),
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                  TextField(
+                    obscureText: true,
+                    keyboardType: TextInputType.emailAddress,
+                    textAlign: TextAlign.center,
+                    onChanged: (input) {
+                      password = input;
+                    },
+                    decoration: kTextFieldDecoration.copyWith(
+                        hintText: 'Enter your password'),
+                  ),
+                  RoundedButton(
+                    onPressed: () async {
+                      setState(() {
+                        spinner = true;
+                      });
+                      try {
+                        final user = await _auth.signInWithEmailAndPassword(
+                            email: email, password: password);
+                        if (user != null) {
+                          Navigator.pushNamed(context, HomeScreen.id);
+                        }
+                        setState(() {
+                          spinner = false;
+                        });
+                      } catch (e) {
+                        setState(() {
+                          _error = e.message;
+                          spinner = false;
+                        });
                       }
-                      setState(() {
-                        spinner = false;
-                      });
-                    } catch (e) {
-                      setState(() {
-                        _error = e.message;
-                        spinner = false;
-                      });
-                    }
-                  },
-                  title: 'submit',
-                  colour: Colors.deepPurple,
-                ),
-                Expanded(
-                  child: SizedBox(),
-                  flex: 2,
-                )
-              ],
-            ),
+                    },
+                    title: 'submit',
+                    colour: Colors.deepPurple,
+                  ),
+                ],
+              ),
+            ]),
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:ai_attendance/screens/password_email_sent.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_attendance/screens/welcome_screen.dart';
@@ -46,7 +47,7 @@ class _MyAppState extends State<MyApp> {
       return CircularProgressIndicator();
     }
     return MaterialApp(
-      initialRoute: LoginScreen.id,
+      initialRoute: WelcomeScreen.id,
       routes: {
         PasswordReset.id: (context) => PasswordReset(),
         WelcomeScreen.id: (context) => WelcomeScreen(),
