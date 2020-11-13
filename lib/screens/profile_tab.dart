@@ -1,13 +1,15 @@
 import 'package:ai_attendance/components/main_button.dart';
 import 'package:ai_attendance/components/text_field.dart';
+import 'package:ai_attendance/screens/login_screen.dart';
 import 'package:ai_attendance/screens/password_email_sent.dart';
 import 'package:ai_attendance/user_email.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileTab extends StatefulWidget {
   @override
@@ -46,12 +48,7 @@ class _ProfileTabState extends State<ProfileTab> {
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (!snapshot.hasData || !snapshot.data.exists) {
-            return ModalProgressHUD(
-              inAsyncCall: true,
-              child: Scaffold(
-                backgroundColor: Colors.white,
-              ),
-            );
+            return LoginScreen();
           } else {
             var userDocument = snapshot.data;
             return ModalProgressHUD(
@@ -143,8 +140,11 @@ class _ProfileTabState extends State<ProfileTab> {
                           colour: Colors.black,
                         ),
                         RoundedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             _auth.signOut();
+                            SharedPreferences preferences =
+                                await SharedPreferences.getInstance();
+                            preferences.setString('email', null);
                             Navigator.pop(context);
                           },
                           title: 'SIGN OUT',

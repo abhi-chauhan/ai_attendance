@@ -1,4 +1,5 @@
 import 'package:ai_attendance/components/constants.dart';
+import 'package:ai_attendance/screens/loading_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,20 +22,15 @@ class _HomeTabState extends State<HomeTab> {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('users')
-          //.doc(Provider.of<MyUser>(context).email)
-          .doc('abhishekchouhan108@gmail.com')
+          .doc(Provider.of<MyUser>(context).email)
+          //.doc('abhishekchouhan108@gmail.com')
           .collection(DateTime.now().year.toString())
           .doc(currentMonthSelected)
           .snapshots(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (!snapshot.hasData || !snapshot.data.exists) {
-          return ModalProgressHUD(
-            inAsyncCall: true,
-            child: Scaffold(
-              backgroundColor: Colors.white,
-            ),
-          );
+          return LoadingScreen();
         } else {
           var userDocument = snapshot.data;
           int noOfUnpaidLeaves =

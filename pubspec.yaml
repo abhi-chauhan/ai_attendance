@@ -18,6 +18,9 @@ dependencies:
   sleek_circular_slider: ^1.2.0+web
   shared_preferences: ^0.5.12+4
   syncfusion_flutter_calendar: ^18.3.47
+  firebase_messaging: ^7.0.3
+  get_it: ^5.0.1
+  url_launcher: ^5.7.10
 dev_dependencies:
 
   flutter_test:

@@ -1,9 +1,11 @@
 import 'package:ai_attendance/components/calendar_field.dart';
 import 'package:ai_attendance/components/main_button.dart';
 import 'package:ai_attendance/components/day_details.dart';
+import 'package:ai_attendance/screens/report_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ai_attendance/components/constants.dart';
@@ -215,10 +217,10 @@ class _CalendarTabState extends State<CalendarTab> {
                               ),
                               Container(
                                 width: 100.0,
-                                child: RoundedButton(
-                                  onPressed: null,
-                                  title: 'Report',
-                                  colour: Colors.red,
+                                child: ReportButton(
+                                  date: _currentDateSelected,
+                                  month: _currentMonthSelected,
+                                  year: _currentYearSelected,
                                 ),
                               )
                             ],
