@@ -1,6 +1,3 @@
-import 'dart:ffi';
-
-import 'file:///C:/Users/balra/AndroidStudioProjects/ai_attendance/lib/Notification/push_notifications.dart';
 import 'package:ai_attendance/screens/loading_screen.dart';
 import 'package:ai_attendance/screens/password_email_sent.dart';
 import 'package:ai_attendance/screens/report_button.dart';
@@ -11,6 +8,7 @@ import 'package:ai_attendance/screens/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,7 +46,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  // static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   @override
   void initState() {
     initializeFlutterFire();
@@ -65,8 +63,7 @@ class _MyAppState extends State<MyApp> {
     if (!_initialized) {
       return CircularProgressIndicator();
     }
-    final pushNotificationService = PushNotificationService(_firebaseMessaging);
-    pushNotificationService.initialise();
+
     String initialScreen;
     switch (widget.emailValue) {
       case null:

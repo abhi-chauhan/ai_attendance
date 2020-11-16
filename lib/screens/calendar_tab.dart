@@ -36,6 +36,7 @@ class _CalendarTabState extends State<CalendarTab> {
           if (!snapshot.hasData || !snapshot.data.exists) {
             return Scaffold(
               appBar: AppBar(
+                automaticallyImplyLeading: false,
                 title: Text(
                   "Calendar",
                   style: TextStyle(
@@ -118,6 +119,7 @@ class _CalendarTabState extends State<CalendarTab> {
 
             return Scaffold(
               appBar: AppBar(
+                automaticallyImplyLeading: false,
                 title: Text(
                   "Calendar",
                   style: TextStyle(

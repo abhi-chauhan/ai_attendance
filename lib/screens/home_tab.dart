@@ -43,7 +43,7 @@ class _HomeTabState extends State<HomeTab> {
                 //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 30.0,
+                    height: 20.0,
                   ),
                   SafeArea(
                     child: Text(

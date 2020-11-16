@@ -92,6 +92,14 @@ class _LoginScreenState extends State<LoginScreen>
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: ListView(children: <Widget>[
+              AlertBox(
+                error: _error,
+                onPressed: () {
+                  setState(() {
+                    _error = null;
+                  });
+                },
+              ),
               SizedBox(
                 height: 150.0,
               ),
@@ -99,14 +107,6 @@ class _LoginScreenState extends State<LoginScreen>
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  AlertBox(
-                    error: _error,
-                    onPressed: () {
-                      setState(() {
-                        _error = null;
-                      });
-                    },
-                  ),
                   Hero(
                     tag: 'logo',
                     child: RotationTransition(
@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen>
                             email: email, password: password);
                         if (user != null) {
                           Navigator.pushNamed(context, HomeScreen.id);
-
+                          _error = null;
                           preferences.setString('email', email);
                           preferences.setString('password', password);
                         }

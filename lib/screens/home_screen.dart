@@ -5,6 +5,7 @@ import 'package:ai_attendance/user_email.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -40,35 +41,41 @@ class _HomeScreenState extends State<HomeScreen> {
     return Provider<MyUser>(
       create: (context) => userEmail,
       builder: (context, MyUser) => MyUser,
-      child: Scaffold(
-        body: tabs[_currentIndex],
-        backgroundColor: Colors.white,
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.shifting,
-          currentIndex: _currentIndex,
-          iconSize: 30,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text("Home"),
-              backgroundColor: Colors.deepPurple,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today),
-              title: Text("Calendar"),
-              backgroundColor: Colors.blue,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              title: Text("Profile"),
-              backgroundColor: Colors.black,
-            ),
-          ],
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
+      child: WillPopScope(
+        onWillPop: () {
+          SystemNavigator.pop(animated: true);
+          return new Future(() => true);
+        },
+        child: Scaffold(
+          body: tabs[_currentIndex],
+          backgroundColor: Colors.white,
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.shifting,
+            currentIndex: _currentIndex,
+            iconSize: 30,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: Text("Home"),
+                backgroundColor: Colors.deepPurple,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.calendar_today),
+                title: Text("Calendar"),
+                backgroundColor: Colors.blue,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle),
+                title: Text("Profile"),
+                backgroundColor: Colors.black,
+              ),
+            ],
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+          ),
         ),
       ),
     );

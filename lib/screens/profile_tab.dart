@@ -1,5 +1,6 @@
 import 'package:ai_attendance/components/main_button.dart';
 import 'package:ai_attendance/components/text_field.dart';
+import 'package:ai_attendance/screens/loading_screen.dart';
 import 'package:ai_attendance/screens/login_screen.dart';
 import 'package:ai_attendance/screens/password_email_sent.dart';
 import 'package:ai_attendance/user_email.dart';
@@ -19,6 +20,7 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   final _auth = FirebaseAuth.instance;
   User currentUser1;
+  bool emailNotifications = false;
 
   bool spinner = false;
   void getCurrentUser() async {
@@ -48,7 +50,7 @@ class _ProfileTabState extends State<ProfileTab> {
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (!snapshot.hasData || !snapshot.data.exists) {
-            return LoginScreen();
+            return LoadingScreen();
           } else {
             var userDocument = snapshot.data;
             return ModalProgressHUD(
@@ -122,6 +124,33 @@ class _ProfileTabState extends State<ProfileTab> {
                         ),
                         SizedBox(
                           height: 10.0,
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(left: 18.0),
+                                child: Text(
+                                  "Email Notifications",
+                                  style: TextStyle(
+                                      fontSize: 20.0,
+                                      fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Switch(
+                                    value: emailNotifications,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        emailNotifications = value;
+                                        setState(() {});
+                                      });
+                                    }),
+                              )
+                            ],
+                          ),
                         ),
                         RoundedButton(
                           onPressed: () async {
