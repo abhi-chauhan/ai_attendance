@@ -20,7 +20,6 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   final _auth = FirebaseAuth.instance;
   User currentUser1;
-  bool emailNotifications = false;
 
   bool spinner = false;
   void getCurrentUser() async {
@@ -40,6 +39,11 @@ class _ProfileTabState extends State<ProfileTab> {
     super.initState();
   }
 
+  bool notifications(String mailnotification) {
+    if (mailnotification == 'true') return true;
+    if (mailnotification == 'false') return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -53,6 +57,8 @@ class _ProfileTabState extends State<ProfileTab> {
             return LoadingScreen();
           } else {
             var userDocument = snapshot.data;
+            bool emailNotifications =
+                notifications(userDocument['emailnotifications']);
             return ModalProgressHUD(
               inAsyncCall: spinner,
               child: Scaffold(
@@ -143,10 +149,17 @@ class _ProfileTabState extends State<ProfileTab> {
                                 child: Switch(
                                     value: emailNotifications,
                                     onChanged: (value) {
-                                      setState(() {
-                                        emailNotifications = value;
-                                        setState(() {});
+                                      emailNotifications = value;
+                                      FirebaseFirestore.instance
+                                          .collection('users')
+                                          .doc(Provider.of<MyUser>(context,
+                                                  listen: false)
+                                              .email)
+                                          .update({
+                                        'emailnotifications':
+                                            emailNotifications.toString()
                                       });
+                                      setState(() {});
                                     }),
                               )
                             ],

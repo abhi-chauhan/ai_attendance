@@ -27,7 +27,6 @@ class _CalendarTabState extends State<CalendarTab> {
         stream: FirebaseFirestore.instance
             .collection('users')
             .doc(Provider.of<MyUser>(context).email)
-            //.doc('abhishekchouhan108@gmail.com')
             .collection(_currentYearSelected)
             .doc(_currentMonthSelected)
             .snapshots(),
