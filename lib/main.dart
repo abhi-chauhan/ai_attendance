@@ -46,7 +46,6 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  // static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   @override
   void initState() {
     initializeFlutterFire();
